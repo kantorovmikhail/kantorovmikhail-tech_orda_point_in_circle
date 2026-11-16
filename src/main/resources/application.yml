@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: circle-lab
+server:
+  address: 127.0.0.1
+experiment:
+  circle: { x: 0, y: 0, radius: 5, tolerance: 0.01 }
+  threshold: 0.5
+  results-directory: results
+  network:
+    input-size: 2
+    seed: 42
+    initialization: XAVIER
+    layers:
+      - neurons: 16
+        activation: TANH
+        bias: { enabled: true, initialization: ZERO, value: 0, scale: 0.1 }
+      - neurons: 16
+        activation: TANH
+        bias: { enabled: true, initialization: ZERO, value: 0, scale: 0.1 }
+      - neurons: 1
+        activation: SIGMOID
+        bias: { enabled: true, initialization: ZERO, value: 0, scale: 0.1 }
+  datasets:
+    training:
+      sample-count: 3000
+      seed: 101
+      min-x: -7
+      max-x: 7
+      min-y: -7
+      max-y: 7
+      strategy: HYBRID
+      step: 0
+      boundary-fraction: 0.5
+      boundary-width: 0.7
+      distribution: GAUSSIAN
+      exact-boundary-samples: 0
+    validation:
+      sample-count: 1000
+      seed: 202
+      min-x: -7
+      max-x: 7
+      min-y: -7
+      max-y: 7
+      strategy: UNIFORM
+      step: 0
+      boundary-fraction: 0.5
+      boundary-width: 0.7
+      distribution: GAUSSIAN
+      exact-boundary-samples: 0
+    test:
+      sample-count: 2000
+      seed: 303
+      min-x: -7
+      max-x: 7
+      min-y: -7
+      max-y: 7
+      strategy: UNIFORM
+      step: 0
+      boundary-fraction: 0.5
+      boundary-width: 0.7
+      distribution: GAUSSIAN
+      exact-boundary-samples: 0
+  training:
+    epochs: 100
+    learning-rate: 0.01
+    shuffle: true
+    seed: 42
+    metrics-every: 1
+  visualization: { resolution: 80, max-points: 600 }
